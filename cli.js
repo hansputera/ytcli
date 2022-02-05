@@ -153,15 +153,14 @@ export async function showVideoQuery(video) {
 
 	const answers = await inquirer.prompt([
 			{
-				type: 'list',
+				type: 'input',
 				name: 'type',
-				message: 'Select video type bellow:',
-				choices: ['mp3', 'mp4', 'webm'],
-				default: 'mp3'
+				message: 'Video type:',
+				default: 'mp4',
 			}
 	]);
 
-	ytdl.exec('https://youtube.com/watch?v=' + video.id, {
+	const s = ytdl.exec('https://youtube.com/watch?v=' + video.id, {
 		noWarnings: true,
 	    noCallHome: true,
 	    noCheckCertificate: true,
@@ -170,9 +169,16 @@ export async function showVideoQuery(video) {
 	    output: path.join(getPathData().__dirname, '_videos', video.title.replace(/\//g, '-') + '.' + answers.type),
 	});
 
+	s.stdout.on('data', (text) => {
+		console.log(chalk.white(text));
+	});
+	s.stderr.on('data', (text) => {
+		console.log(chalk.red.bold(text));
+	});
+
 	console.log(chalk.green.bold('Downloading ...'));
 	process.on('exit', () => {
-		console.log('done.');
+		console.log('exited.');
 	});
 }
 
