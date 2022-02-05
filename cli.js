@@ -22,7 +22,7 @@ if (!fs.existsSync(getPathData().__dirname, '_videos')) {
  * @param {string} message confirmation message
  * @return {Promise<boolean>}
  */
-export async function confirmAsk(message) {
+async function confirmAsk(message) {
 	const answers = await inquirer.prompt([
 		{
 			type: 'confirm',
@@ -60,7 +60,7 @@ async function askQuery() {
 		{
 			type: 'input',
 			name: 'query',
-			message: 'Type video name or search query:',
+			message: 'Type video name or query:',
 			filter: (value) => makeInquirerFilter(() => {
 				if (value.length >= 1 && value.length <= 1e5) {
 					return value;
@@ -125,7 +125,7 @@ async function searchVideoQuery(data) {
 			{
 				type: 'list',
 				name: 'video',
-				message: 'Select videos bellow to download!',
+				message: 'Select videos below to download!',
 				choices: videos.map((video) => video.title),
 			}
 		]);
@@ -176,4 +176,4 @@ export async function showVideoQuery(video) {
 	});
 }
 
-askQuery(); // begin
+askQuery();

@@ -1,5 +1,5 @@
 {
-  "name": "ytcli",
+  "name": "my-ytcli",
   "version": "1.0.0",
   "description": "YouTube Download CLI",
   "main": "index.js",
@@ -11,6 +11,5 @@
     "scrape-youtube": "^2.1.14",
     "youtube-dl-exec": "^2.0.2"
   },
-  "type": "module",
-  "bin": "./cli.js"
+  "type": "module"
 }
